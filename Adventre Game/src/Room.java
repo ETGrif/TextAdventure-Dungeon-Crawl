@@ -3,12 +3,15 @@ public class Room
 	{
 		private String roomType;
 		private String[] doors;
-		private ArrayList thingsInRoom;
+		private ArrayList objects;
+		private String description;
 		
-		public Room(String rT, String[] d, ArrayList t){
+		
+		public Room(String rT, String[] ds, ArrayList ob, String de){
 			roomType = rT;
-			doors = d;
-			thingsInRoom = t;
+			doors = ds;
+			objects = ob;
+			description = de;
 			
 		}
 		
@@ -31,11 +34,11 @@ public class Room
 			}
 		public ArrayList getThingsInRoom()
 			{
-				return thingsInRoom;
+				return objects;
 			}
 		public void setThingsInRoom(ArrayList thingsInRoom)
 			{
-				this.thingsInRoom = thingsInRoom;
+				this.objects = thingsInRoom;
 			}
 		
 		

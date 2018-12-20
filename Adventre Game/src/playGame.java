@@ -9,7 +9,7 @@ public class playGame
 				for(int y = 0; y < Map.map[0].length; y++){
 					for(int x = 0; x < Map.map.length; x++){
 						String blank = userInput.nextLine();
-						Map.generateRoom(x,y, null);
+						Map.generateRoom(x,y, null, 1.00);
 						System.out.println("\n\n");
 					}
 				}
