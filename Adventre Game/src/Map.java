@@ -35,7 +35,7 @@ public class Map
 				// System.out.println("setting rooms to random for room at
 				// "+x+", "+y);
 				for (int i = 0; i < directions.length; i++) {
-					if ((int) (Math.random() * 100)+1 <= (int) ((1-doorWeight)*100)) {
+					if ((int) (Math.random() * 100)+1 <= (int) (doorWeight*100)) {
 						doors[i] = directions[i];
 						// System.out.println("randomly created door facing
 						// "+directions[i]);
@@ -124,8 +124,7 @@ public class Map
 					// consistently nonexistent");
 				}
 
-				// System.out.println("Final doors;
-				// "+doors[0]+":"+doors[1]+":"+doors[2]+":"+doors[3]);
+				 System.out.println("Final doors  "+doors[0]+":"+doors[1]+":"+doors[2]+":"+doors[3]);
 
 				return doors;
 
