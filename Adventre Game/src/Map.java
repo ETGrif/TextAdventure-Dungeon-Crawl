@@ -17,7 +17,7 @@ public class Map
 		public static void generateRoom(int x, int y, String roomType, double doorWeight)
 			{
 
-				map[x][y] = new Room(roomType, generateDoors(x, y, doorWeight), null, "Just a Generic Room");
+				map[x][y] = new Room(roomType, generateDoors(x, y - 1, doorWeight), null, "Just a Generic Room");
 
 			}
 
@@ -45,27 +45,22 @@ public class Map
 				// the doors consistent
 
 				// NORTH
-				if (y != 0) {
+				try {
 					// if room above, set to that room
-					if (map[x][y - 1] != null) {
-
-						if (map[x][y - 1].getDoors()[2] == south) {
-							doors[0] = north;
-						} else {
-							doors[0] = null;
-						}
-						// System.out.println("Door facing North made
-						// consistent");
+					if (map[x][y - 1].getDoors()[2] == south) {
+						doors[0] = north;
+					} else {
+						doors[0] = null;
 					}
-				} else {
+				
+				} catch (Exception e) {
 					// if no room allowed, make it null
+					// System.out.println("No room existed north, door not made");
 					doors[0] = null;
-					// System.out.println("No room existed north, door door made
-					// consistently nonexistent");
 				}
 
 				// WEST
-				if (x != 0) {
+				try {
 					// if room to left, set to that room
 					if (map[x - 1][y] != null) {
 
@@ -74,18 +69,15 @@ public class Map
 						} else {
 							doors[1] = null;
 						}
-						// System.out.println("Door facing West made
-						// consistent");
 					}
-				} else {
+				} catch (Exception e) {
 					// if no room allowed, make it null
+					// System.out.println("No room existed west, door not made");
 					doors[1] = null;
-					// System.out.println("No room existed west, door door made
-					// consistently nonexistent");
 				}
 
 				// SOUTH
-				if (y != map[0].length - 1) {
+				try {
 					if (map[x][y + 1] != null) {
 						// if room below, set to that room
 
@@ -97,15 +89,14 @@ public class Map
 						// System.out.println("Door facing South made
 						// consistent");
 					}
-				} else {
+				} catch (Exception e) {
 					// if no room allowed, make it null
+					// System.out.println("No room existed south, door not made");
 					doors[2] = null;
-					// System.out.println("No room existed south, door door made
-					// consistently nonexistent");
 				}
 
 				// EAST
-				if (x != map.length - 1) {
+				try {
 					if (map[x + 1][y] != null) {
 						// if room below, set to that room
 
@@ -117,11 +108,10 @@ public class Map
 						// System.out.println("Door facing East made
 						// consistent");
 					}
-				} else {
+				} catch (Exception e) {
 					// if no room, make it null
+					// System.out.println("No room existed east, door not made");
 					doors[3] = null;
-					// System.out.println("No room existed east, door door made
-					// consistently nonexistent");
 				}
 
 				 System.out.println("Final doors  "+doors[0]+":"+doors[1]+":"+doors[2]+":"+doors[3]);
@@ -130,4 +120,4 @@ public class Map
 
 			}
 
-	}
+			}

@@ -41,10 +41,5 @@ public class Room
 				this.objects = thingsInRoom;
 			}
 		
-		
-		
-		
-		
-		
 	}
 

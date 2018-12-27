@@ -21,47 +21,61 @@ public class WorldBuilder {
 
 	public static void newRoom(int x, int y, int depth) {
 
-		System.out.println("Generating Room (" + x + ", " + y + ")");
+		System.out.println("\nGenerating Room (" + x + ", " + y + ")");
 		// generate room at (x,y)
-		Map.generateRoom(x, y - 1, null, getDoorWeight(depth + 1));
+		Map.generateRoom(x, y, null, getDoorWeight(depth + 1));
 
 		// BRANCH OUT TO OTHER ROOMS
 
 		// North
 		if (y != 0) {
-			 
-				System.out.println("Moving North From (" + x + ", " + y + ")");
-				newRoom(x, y - 1, depth + 1);
-
-			}
+			 try {
+				 if (Map.map[x][y - 1] == null) {
+					System.out.println("Moving North From (" + x + ", " + y + ")");
+					newRoom(x, y - 1, depth + 1);
+				 }
+			 } catch (Exception e) {
+				 
+			 }
+		}
 		
 
 		// West
 		if (x != 0) {
-			if (Map.map[x - 1][y] != null) {
-				System.out.println("Moving West From (" + x + ", " + y + ")");
-				newRoom(x, y - 1, depth + 1);
-
+			try {
+				if (Map.map[x - 1][y] == null) {
+					System.out.println("Moving West From (" + x + ", " + y + ")");
+					newRoom(x - 1, y, depth + 1);
+				}
+			}catch (Exception e) {
+				
 			}
 		}
 
 		// South
 		if (y != Map.map[0].length) {
-			if (Map.map[x][y + 1] != null) {
-				System.out.println("Moving South From (" + x + ", " + y + ")");
-				newRoom(x, y - 1, depth + 1);
-
+			try {
+				if (Map.map[x][y + 1] == null) {
+					System.out.println("Moving South From (" + x + ", " + y + ")");
+					newRoom(x, y + 1, depth + 1);
+				}
+			} catch (Exception e) {
+				
 			}
 		}
 
 		// East
 		if (x != Map.map.length) {
-			if (Map.map[x + 1][y] != null) {
-				System.out.println("Moving East From (" + x + ", " + y + ")");
-				newRoom(x, y - 1, depth + 1);
-
+			try {
+				if (Map.map[x + 1][y] == null) {
+					System.out.println("Moving East From (" + x + ", " + y + ")");
+					newRoom(x + 1, y, depth + 1);
+				}
+			} catch (Exception e) {
+				
 			}
 		}
+		
 
 	}
 
