@@ -1,4 +1,4 @@
-
+import java.util.ArrayList;
 public class Player
 	{
 
@@ -6,6 +6,7 @@ public class Player
 		private int locX;
 		private int loxY;
 		private int hp;
+		private ArrayList inventory;
 		
 		
 		

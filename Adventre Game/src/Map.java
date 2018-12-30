@@ -14,14 +14,14 @@ public class Map
 				Map.map = map;
 			}
 
-		public static void generateRoom(int x, int y, String roomType, double doorWeight)
+		public static void generateRoom(int x, int y, String roomType, int doorWeight)
 			{
 
-				map[x][y] = new Room(roomType, generateDoors(x, y - 1, doorWeight), null, "Just a Generic Room");
+				map[x][y] = new Room(roomType, generateDoors(x, y, doorWeight), null, "Just a Generic Room");
 
 			}
 
-		public static String[] generateDoors(int x, int y, double doorWeight)
+		public static String[] generateDoors(int x, int y, int doorWeight)
 			{
 
 				String north = "north";
@@ -31,33 +31,46 @@ public class Map
 				String[] directions = { north, west, south, east };
 
 				String[] doors = new String[4];
+				
+				
 				// First set all rooms as random
-				// System.out.println("setting rooms to random for room at
-				// "+x+", "+y);
+				 System.out.println("setting rooms to random for room at"+x+", "+y);
+				 System.out.println(doorWeight);
 				for (int i = 0; i < directions.length; i++) {
-					if ((int) (Math.random() * 100)+1 <= (int) (doorWeight*100)) {
+					int random = (int)(Math.random() *100)+1;
+					System.out.println(random);
+					if (random < doorWeight) {
 						doors[i] = directions[i];
-						// System.out.println("randomly created door facing
-						// "+directions[i]);
+//						 System.out.println("randomly created door facing "+directions[i]);
 					}
 				}
+//				System.out.println("Rands doors  "+doors[0]+":"+doors[1]+":"+doors[2]+":"+doors[3]);
+				
+				
+				
+				
 				// Second , check all adjacent rooms, and if one exists, make
 				// the doors consistent
 
 				// NORTH
+				System.out.println("Checking North");
 				try {
 					// if room above, set to that room
-					if (map[x][y - 1].getDoors()[2] == south) {
+					System.out.println("Room Test: "+map[x][y - 1].getDoors()[2]);
+					if (map[x][y - 1].getDoors()[2] != null) {
 						doors[0] = north;
 					} else {
 						doors[0] = null;
 					}
 				
 				} catch (Exception e) {
+					System.out.println("Caught");
 					// if no room allowed, make it null
 					// System.out.println("No room existed north, door not made");
 					doors[0] = null;
 				}
+				
+				System.out.println("North Checked");
 
 				// WEST
 				try {

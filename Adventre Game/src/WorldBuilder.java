@@ -21,7 +21,7 @@ public class WorldBuilder {
 
 	public static void newRoom(int x, int y, int depth) {
 
-		System.out.println("\nGenerating Room (" + x + ", " + y + ")");
+		System.out.println("\nGenerating Room (" + x + ", " + y + ") with doorWeight of "+ ((int) (getDoorWeight(depth + 1)*100)));
 		// generate room at (x,y)
 		Map.generateRoom(x, y, null, getDoorWeight(depth + 1));
 
@@ -30,7 +30,7 @@ public class WorldBuilder {
 		// North
 		if (y != 0) {
 			 try {
-				 if (Map.map[x][y - 1] == null) {
+				 if (Map.map[x][y - 1] == null && Map.map[x][y].getDoors()[0] == "north") {
 					System.out.println("Moving North From (" + x + ", " + y + ")");
 					newRoom(x, y - 1, depth + 1);
 				 }
@@ -43,7 +43,7 @@ public class WorldBuilder {
 		// West
 		if (x != 0) {
 			try {
-				if (Map.map[x - 1][y] == null) {
+				if (Map.map[x - 1][y] == null && Map.map[x][y].getDoors()[1] == "west") {
 					System.out.println("Moving West From (" + x + ", " + y + ")");
 					newRoom(x - 1, y, depth + 1);
 				}
@@ -55,7 +55,7 @@ public class WorldBuilder {
 		// South
 		if (y != Map.map[0].length) {
 			try {
-				if (Map.map[x][y + 1] == null) {
+				if (Map.map[x][y + 1] == null && Map.map[x][y].getDoors()[2] == "south") {
 					System.out.println("Moving South From (" + x + ", " + y + ")");
 					newRoom(x, y + 1, depth + 1);
 				}
@@ -67,7 +67,7 @@ public class WorldBuilder {
 		// East
 		if (x != Map.map.length) {
 			try {
-				if (Map.map[x + 1][y] == null) {
+				if (Map.map[x + 1][y] == null && Map.map[x][y].getDoors()[3] == "east") {
 					System.out.println("Moving East From (" + x + ", " + y + ")");
 					newRoom(x + 1, y, depth + 1);
 				}
@@ -79,9 +79,14 @@ public class WorldBuilder {
 
 	}
 
-	public static double getDoorWeight(int depth) {
-		double doorWeight = (1.05 - Math.pow(0.07, ((-.01 * depth) + 1)));
-		return doorWeight;
+	public static int getDoorWeight(int depth) {
+		int reach = 100;
+//		System.out.println("depth:"+depth);
+//		System.out.println("reach:"+reach);
+		double fraction = (double) depth/reach;
+//		System.out.println("depth/reach:"+a);
+		double doorWeight = 1 - Math.pow(0.1, ((-1*fraction)+1));
+		return (int) (doorWeight * 100);
 
 	}
 }
