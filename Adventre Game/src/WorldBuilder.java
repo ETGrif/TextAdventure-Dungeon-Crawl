@@ -11,17 +11,20 @@ public class WorldBuilder {
 //				findDoors
 //				generateRoom on the most-clockwise room
 
-		int startingX = (int) (Math.random() * Map.map.length);
-		int startingY = (int) (Math.random() * Map.map[0].length);
+		//P.S. this should be a bell curve, so that its more likely to start towards the center of the map
+		int startingX = (int) (((Math.random() * Map.map.length)  +  (Math.random() * Map.map.length))/2);
+		int startingY = (int) (((Math.random() * Map.map.length)  +  (Math.random() * Map.map.length))/2);
 
 		System.out.println("Starting Point: " + startingX + ", " + startingY);
 		newRoom(startingX, startingY, 0);
-
+		System.out.println("Map generated");
+		
+		
 	}
 
 	public static void newRoom(int x, int y, int depth) {
 
-		System.out.println("\nGenerating Room (" + x + ", " + y + ") with doorWeight of "+ ((int) (getDoorWeight(depth + 1)*100)));
+		System.out.println("\nGenerating Room (" + x + ", " + y + ") with doorWeight of "+ getDoorWeight(depth + 1));
 		// generate room at (x,y)
 		Map.generateRoom(x, y, null, getDoorWeight(depth + 1));
 
@@ -75,12 +78,12 @@ public class WorldBuilder {
 				
 			}
 		}
-		
+		System.out.println("Retacing from ("+x+","+y+")");
 
 	}
 
 	public static int getDoorWeight(int depth) {
-		int reach = 100;
+		int reach = 5;
 //		System.out.println("depth:"+depth);
 //		System.out.println("reach:"+reach);
 		double fraction = (double) depth/reach;
@@ -89,4 +92,89 @@ public class WorldBuilder {
 		return (int) (doorWeight * 100);
 
 	}
-}
+
+	public static String generateRoomType(int x, int  y) {
+	
+		String [] doors = Map.map[x][y].getDoors();
+		//STEP ONE get the general room structure
+		
+		int closedDoors = 0;
+		for(String d:doors) {
+			if(d == null) {
+				closedDoors++;
+			}
+		}
+		
+		String chosen;
+		
+		switch(closedDoors) {
+		
+		case 3:
+			//Dead end
+			System.out.println("This is a Deadend room");
+			String[] deadEndTypes = {"Dead End", "Treasure Room","Closet","Cellar","Bunks","Armory","Office","Prison"
+			};
+			chosen= randomString(deadEndTypes);
+			break;
+			
+		case 2:
+			if (doors[0] == doors[2] || doors[1] == doors[3]) {
+				//hallway
+				System.out.println("This is a Straight room");
+				String[] hallwayTypes = {"Hallway","Guarded Entrance","TrapS","Storage Room"
+				};
+				chosen = randomString(hallwayTypes);
+				break;
+			}else{
+				//turn
+				System.out.println("This is a Turn room");
+				String[] turnTypes  = {"HallTurn", "HallTurn","TrapT"
+				};
+				chosen = randomString(turnTypes);
+				break;
+			}
+		
+		case 1:
+			//T-Shaped
+			System.out.println("This is a T room");
+			String[] tShapedTypes = {"Library","Lounge T","Bare Room T"
+			};
+			chosen = randomString(tShapedTypes);
+			break;
+			
+		case 0:
+			//all four
+			System.out.println("This is an All room");
+			String[] AllSideTypes = {"Center Room","Canteen","Lounge A","Bare Room A"
+			};
+			chosen = randomString(AllSideTypes);
+			break;
+			
+		default:
+			System.out.println("Something went terribly wrong!");
+			chosen = null;
+			
+			break;
+		}
+		System.out.println(chosen);
+
+		
+		return chosen;
+		}
+	
+	public static String randomString(String[] strings) {
+		int index = (int)(Math.random()*strings.length);
+		String chosen = strings[index];
+		return chosen;
+	}
+	
+	public static 
+	
+	
+	
+	}
+	
+	
+	
+	
+
