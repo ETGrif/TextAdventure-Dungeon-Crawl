@@ -16,11 +16,14 @@ public class Map
 				Map.map = map;
 			}
 
-		public static void generateRoom(int x, int y, String roomType, int doorWeight)
+		public static void generateRoom(int x, int y, int doorWeight)
 			{
-//				String blank = userInput.nextLine();
-				map[x][y] = new Room(roomType, generateDoors(x, y, doorWeight), null, "Just a Generic Room");
-				WorldBuilder.generateRoomType(x, y);
+				String roomType = WorldBuilder.generateRoomType(x, y);
+				String[] doors = generateDoors(x, y, doorWeight);
+				//Objects in room
+				String description = WorldBuilder.generateDescriptions(x, y, roomType);
+				map[x][y] = new Room(roomType, doors, null, description);
+				
 			}
 
 		public static String[] generateDoors(int x, int y, int doorWeight)

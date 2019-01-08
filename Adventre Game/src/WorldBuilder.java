@@ -26,7 +26,7 @@ public class WorldBuilder {
 
 		System.out.println("\nGenerating Room (" + x + ", " + y + ") with doorWeight of "+ getDoorWeight(depth + 1));
 		// generate room at (x,y)
-		Map.generateRoom(x, y, null, getDoorWeight(depth + 1));
+		Map.generateRoom(x, y, getDoorWeight(depth + 1));
 
 		// BRANCH OUT TO OTHER ROOMS
 
@@ -168,7 +168,11 @@ public class WorldBuilder {
 		return chosen;
 	}
 	
-	public static 
+	public static String generateDescriptions(int x, int y, String roomType) {
+		 
+		
+		
+	}
 	
 	
 	
