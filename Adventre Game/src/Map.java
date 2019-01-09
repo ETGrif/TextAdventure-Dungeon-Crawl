@@ -21,7 +21,8 @@ public class Map
 				String roomType = WorldBuilder.generateRoomType(x, y);
 				String[] doors = generateDoors(x, y, doorWeight);
 				//Objects in room
-				String description = WorldBuilder.generateDescriptions(x, y, roomType);
+//				String description = WorldBuilder.generateDescriptions(x, y, roomType);
+				String description = "Generic";
 				map[x][y] = new Room(roomType, doors, null, description);
 				
 			}

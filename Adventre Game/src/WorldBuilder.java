@@ -168,11 +168,11 @@ public class WorldBuilder {
 		return chosen;
 	}
 	
-	public static String generateDescriptions(int x, int y, String roomType) {
-		 
-		
-		
-	}
+//	public static String generateDescriptions(int x, int y, String roomType) {
+//		 
+//		
+//		
+//	}
 	
 	
 	
