@@ -13,10 +13,10 @@ public class playGame
 //						System.out.println("\n\n");
 //					}
 //				}
+			Player.move();
 			
 			
-			
-			WorldBuilder.generateWorld();
+//			WorldBuilder.generateWorld();
 			
 				
 			}

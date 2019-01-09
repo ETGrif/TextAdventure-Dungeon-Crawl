@@ -23,18 +23,18 @@ public class Player
 				
 		}
 		
-		public static String[] shortenedDoors(int x, int y){
-				String[] doors = Map.map[x][y].getDoors();
-				String[] shortenedDoors = new String[4-WorldBuilder.countClosedDoors()]; 
-				int index = 0;
-				for(String d : doors){
-					if(d != null){
-						shortenedDoors[index] = d;
-						index++;
-					}
-					
-				}
-		}
+//		public static String[] shortenedDoors(int x, int y){
+//				String[] doors = Map.map[x][y].getDoors();
+//				String[] shortenedDoors = new String[4-WorldBuilder.countClosedDoors()]; 
+//				int index = 0;
+//				for(String d : doors){
+//					if(d != null){
+//						shortenedDoors[index] = d;
+//						index++;
+//					}
+//					
+//				}
+//		}
 		
 		public static int askResponse(int max){
 				int response;
