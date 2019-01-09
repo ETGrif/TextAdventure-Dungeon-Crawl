@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 public class Player
 	{
@@ -8,11 +9,36 @@ public class Player
 		static int playerX;
 		static int playerY;
 		private int hp;
+		private ArrayList inventory;
 		
+		
+		
+		public static int getPlayerX()
+			{
+				return playerX;
+			}
+
+		public static void setPlayerX(int playerX)
+			{
+				Player.playerX = playerX;
+			}
+
+		public static int getPlayerY()
+			{
+				return playerY;
+			}
+
+		public static void setPlayerY(int playerY)
+			{
+				Player.playerY = playerY;
+			}
+		
+		
+
 		public static void move(){
 				//Find possible doors
-				String[] doors = {"North","West","East"};
-//				String[] doors = shortenedDoors(playerX, playerY);
+//				String[] doors = {"North","West","East"};
+				String[] doors = shortenedDoors(playerX, playerY);
 				System.out.println("Which direction do you move?");
 				for(int i = 0; i < doors.length; i++){
 					System.out.println((i+1)+": move "+doors[i]);
@@ -23,24 +49,33 @@ public class Player
 				
 		}
 		
-//		public static String[] shortenedDoors(int x, int y){
-//				String[] doors = Map.map[x][y].getDoors();
-//				String[] shortenedDoors = new String[4-WorldBuilder.countClosedDoors()]; 
-//				int index = 0;
-//				for(String d : doors){
-//					if(d != null){
-//						shortenedDoors[index] = d;
-//						index++;
-//					}
-//					
-//				}
-//		}
+		public static String[] shortenedDoors(int x, int y){
+				String[] doors = Map.map[x][y].getDoors();
+	
+				int closedDoors = 0;
+				for(String d:doors) {
+					if(d == null) {
+						closedDoors++;
+					}
+				}
+				
+				String[] shortenedDoors = new String[4-closedDoors]; 
+				int index = 0;
+				for(String d : doors){
+					if(d != null){
+						shortenedDoors[index] = d;
+						index++;
+					}
+					
+				}
+				return shortenedDoors;
+		}
 		
 		public static int askResponse(int max){
 				int response;
 				try{
 					response = userInput.nextInt();
-					if(response > max){
+					if(response > max && response < 0){
 						System.out.println("Not a valid response, try again.");
 						response = askResponse(max);
 						
