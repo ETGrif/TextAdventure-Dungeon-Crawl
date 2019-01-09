@@ -30,6 +30,12 @@ public class Map
 		public static String[] generateDoors(int x, int y, int doorWeight)
 			{
 
+			
+			
+			
+			
+			
+			
 				String north = "north";
 				String west = "west";
 				String south = "south";
@@ -149,7 +155,7 @@ public class Map
 				}
 				
 
-				 System.out.println("Final doors  "+doors[0]+":"+doors[1]+":"+doors[2]+":"+doors[3]);
+//				 System.out.println("Final doors  "+doors[0]+":"+doors[1]+":"+doors[2]+":"+doors[3]);
 
 				return doors;
 

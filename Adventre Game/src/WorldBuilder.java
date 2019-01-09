@@ -151,7 +151,7 @@ public class WorldBuilder {
 			break;
 			
 		default:
-			System.out.println("Something went terribly wrong!");
+			System.out.println("Something went terribly wrong! Very bad.");
 			chosen = null;
 			
 			break;
@@ -167,12 +167,17 @@ public class WorldBuilder {
 		String chosen = strings[index];
 		return chosen;
 	}
-	
+	//gotta work this out
 //	public static String generateDescriptions(int x, int y, String roomType) {
 //		 
 //		
 //		
 //	}
+	
+	
+	
+	
+	
 	
 	
 	
