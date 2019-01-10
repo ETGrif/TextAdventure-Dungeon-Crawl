@@ -22,8 +22,12 @@ public class Map
 				String[] doors = generateDoors(x, y, doorWeight);
 				String roomType = WorldBuilder.generateRoomType(doors);
 				//Objects in room
-//				String description = WorldBuilder.generateDescriptions(x, y, roomType);
-				String description = "Generic";
+				String[] shortenedDoors = Player.shortenedDoors(doors);
+				
+
+				String description = WorldBuilder.generateDescriptions(roomType, shortenedDoors);
+				
+
 				map[x][y] = new Room(roomType, doors, null, description);
 				
 				

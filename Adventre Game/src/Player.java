@@ -32,13 +32,11 @@ public class Player
 			{
 				Player.playerY = playerY;
 			}
-		
-		
 
 		public static void move(){
 				//Find possible doors
 //				String[] doors = {"North","West","East"};
-				String[] doors = shortenedDoors(playerX, playerY);
+				String[] doors = shortenedDoors(Map.map[playerX][playerY].getDoors());
 				System.out.println("Which direction do you move?");
 				for(int i = 0; i < doors.length; i++){
 					System.out.println((i+1)+": move "+doors[i]);
@@ -49,9 +47,7 @@ public class Player
 				
 		}
 		
-		public static String[] shortenedDoors(int x, int y){
-				String[] doors = Map.map[x][y].getDoors();
-	
+		public static String[] shortenedDoors(String[]doors){
 				int closedDoors = 0;
 				for(String d:doors) {
 					if(d == null) {
