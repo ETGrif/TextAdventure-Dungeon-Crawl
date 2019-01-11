@@ -13,14 +13,21 @@ public class WorldBuilder
 				int startingX = (int) (((Math.random() * Map.map.length) + (Math.random() * Map.map.length)) / 2);
 				int startingY = (int) (((Math.random() * Map.map.length) + (Math.random() * Map.map.length)) / 2);
 
-				System.out.println("Starting Point: " + startingX + ", " + startingY);
-				Player.setPlayerX(startingX);
-				Player.setPlayerY(startingY);
+//				System.out.println("Starting Point: " + startingX + ", " + startingY);
 
-				// start off the branch
+				// Generate Basic Map, and make RoomTypes and descriptions
 				newRoom(startingX, startingY, 0);
 
-				// choose an entrance and exit
+				//Create Entrance and set player position
+				Room entrance = chooseDeadEnd();
+				entrance.setRoomType("Entrance");
+				entrance.setDescription("This is the entrance to the Dungeon.");	
+				int playerX = entrance.getX();
+				int playerY = entrance.getY();
+				Player.setPlayerX(playerX);
+				Player.setPlayerY(playerY);
+				//Populate
+				
 
 				System.out.println("Map generated");
 
@@ -108,12 +115,7 @@ public class WorldBuilder
 
 				// STEP ONE get the general room structure
 
-				int closedDoors = 0;
-				for (String d : doors) {
-					if (d == null) {
-						closedDoors++;
-					}
-				}
+				int closedDoors = Room.countClosedDoors(doors);
 
 				String chosen;
 
@@ -176,27 +178,34 @@ public class WorldBuilder
 				return chosen;
 			}
 
-		public static void chooseDeadEnd()
+		public static Room chooseDeadEnd()
 			{
 				ArrayList<Room> deadends = new ArrayList<Room>();
 				for (int y = 0; y < Map.map[0].length; y++) {
 					for (int x = 0; x < Map.map.length; x++) {
-						// if a deadend, add it to arraylist
+						Room r = Map.map[x][y];
+						if (Room.countClosedDoors(r.getDoors()) == 3) {
+							deadends.add(r);
+						}
 
 					}
 				}
 
+				int index = (int) (Math.random() * deadends.size());
+				return deadends.get(index);
+
 			}
 
-
-		public static String generateDescriptions(String roomType, String[] doors){
+		public static String generateDescriptions(String roomType, String[] doors)
+			{
 				String description;
-				switch(roomType){
-				default:
-					description = "Just a generic room";
-				}
+				switch (roomType)
+					{
+					default:
+						description = "Tell the programmer to add more descriptions!";
+					}
 				return description;
-				
-		}
+
+			}
 
 	}
