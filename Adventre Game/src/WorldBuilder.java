@@ -184,8 +184,13 @@ public class WorldBuilder
 				for (int y = 0; y < Map.map[0].length; y++) {
 					for (int x = 0; x < Map.map.length; x++) {
 						Room r = Map.map[x][y];
+//						System.out.println("Checking room " + x + "," + y);
+						try{
 						if (Room.countClosedDoors(r.getDoors()) == 3) {
 							deadends.add(r);
+						}
+						}catch(Exception e){
+							
 						}
 
 					}

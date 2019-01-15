@@ -4,10 +4,11 @@ public class Room
 	{
 		private int x;
 		private int y;
-		private String roomType;
+		static String roomType;
 		private String[] doors;
 		private ArrayList objects;
-		private String description;
+		static String description;
+		static boolean isVisited = false;
 
 		public Room(int x_, int y_, String rT, String[] ds, ArrayList ob, String de)
 			{
@@ -74,6 +75,7 @@ public class Room
 		public String getDescription()
 			{
 				return description;
+
 			}
 
 		public void setDescription(String description)
@@ -81,8 +83,29 @@ public class Room
 				this.description = description;
 			}
 
+		public boolean isVisited()
+			{
+				return isVisited;
+			}
+
+		public void setVisited(boolean isVisited)
+			{
+				this.isVisited = isVisited;
+			}
+
 		
 		
+		
+		
+		
+		public static void printDescription(){
+				if (isVisited){
+					System.out.println("You are back in the " + roomType + "room.");
+				} else {
+					System.out.println(description);
+				}
+		}
+
 		public static int countClosedDoors(String[] doors)
 			{
 				int closedDoors = 0;

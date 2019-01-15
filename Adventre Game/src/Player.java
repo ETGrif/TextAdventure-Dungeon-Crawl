@@ -35,6 +35,10 @@ public class Player
 		
 		
 		public static void act(){
+				System.out.println("\n\n");
+				Room currentRoom = Map.map[playerX][playerY];
+//				System.out.println("You are in a "+ currentRoom.getRoomType() + " room. There are some doors...");
+				currentRoom.printDescription();
 				move();
 		}
 		
@@ -47,8 +51,56 @@ public class Player
 				for (int i = 0; i < doors.length; i++) {
 					System.out.println((i + 1) + ": move " + doors[i]);
 				}
-				int response = askResponse(doors.length);
-				System.out.println("You chose to move " + doors[response - 1]);
+
+				int response = 0;
+				String res;
+				// if its an entrance, it needs "exit" as a choice
+				if (Map.map[playerX][playerY].getRoomType() == "Entrance") {
+					System.out.println((doors.length + 1) + ": exit dungeon");
+					response = askResponse(doors.length + 1);
+					if (response == doors.length + 1) {
+						res = "exit";
+					} else {
+						res = doors[response - 1];
+					}
+				} else {
+					response = askResponse(doors.length);
+					System.out.println("You chose to move " + doors[response - 1]);
+					res = doors[response - 1];
+				}
+				// actually move in that direction
+				switch (res)
+					{
+					case "north":
+						// System.out.println("north");
+						playerY--;
+						return;
+
+					case "west":
+						// System.out.println("west");
+						playerX--;
+						return;
+
+					case "south":
+						// System.out.println("south");
+						playerY++;
+						return;
+
+					case "east":
+						// System.out.println("east");
+						playerX++;
+						return;
+
+					case "exit":
+						System.out.println("You exit the dungeon.");
+						System.exit(0);
+						return;
+
+					default:
+						System.out.println("Something went wrong with the directions. Response:" + doors[response - 1]);
+						return;
+
+					}
 
 			}
 
